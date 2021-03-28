@@ -1,0 +1,34 @@
+# Deployments are part of the apps version 1 API spec.
+apiVersion: apps/v1
+kind: Deployment
+
+# The deployment needs a name
+metadata:
+  name: node-app-4
+
+# The spec includes the label selector the Deployment uses to find its own managed resources.
+# Here we are using the app label, but this could be any combination of key-value pairs.
+spec:
+  selector:
+    matchLabels:
+      app: node-app-4
+
+  # The template is used when the Deployment creates a pod template.
+  template:
+    # Pods in a deployment don't have a name, but they need to specify labels that match the selector metadata
+    metadata:
+      labels:
+        app: node-app-4
+    # The pod spec lists the container name and image.
+    spec:
+      containers:
+      - name: node-basic-app
+        image: gules/basic-node-server:1.0
+        # We can add resources limits for the deployment.
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        # The container port used by the app.
+        ports:
+        - containerPort: 8080
