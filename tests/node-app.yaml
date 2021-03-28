@@ -1,0 +1,19 @@
+# Version: 1.0
+
+# This kubernetes manifest creates the pod in same way that with run command
+# Manifests always specify the version of the kubernetes API and the type of resource
+apiVersion: v1
+kind: Pod
+
+# Metadata for the resource includes the name (mandatory)
+# and labels (optional)
+metadata:
+  name: node-app-3
+
+# The spec is the actual specification for the resource.
+# For a pod the minimum is the container(s) to run, with the container name and image
+spec:
+  containers:
+  - name: node-app
+    image: gules/basic-node-server:1.0
+    
